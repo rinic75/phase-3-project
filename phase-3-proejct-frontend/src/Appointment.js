@@ -56,20 +56,14 @@ function Appointment({
           </thead>
           <tbody>
             {appointments.map((appointment) => {
-              const golfPro = golfPros.find((pro) => pro.id === appointment.golfpro_id);
-              const client = clients.find((client) => client.id === appointment.client_id);
-
-              if (!golfPro || !client) {
-                return null; // Skip rendering if golfPro or client is not found
-              }
-
+              
               return (
                 <tr key={appointment.id}>
                   <td>{appointment.time}</td>
-                  <td>{golfPro.name}</td>
-                  <td>{client.name}</td>
-                  <td>{client.phone}</td>
-                  <td>{client.comment}</td>
+                  <td>{appointment.golfpro.name}</td>
+                  <td>{appointment.client.name}</td>
+                  <td>{appointment.client.phone}</td>
+                  <td>{appointment.client.comment}</td>
                   <td>
                     <button
                       value={appointment.id}
