@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function Appointment({
   appointments,
-  golfPros,
-  clients,
   onHandleDelete,
 }) {
   const navigate = useNavigate();

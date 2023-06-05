@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css"; // Import the CSS file
 import Header from "./Header";
 import Location from "./Location";
+import AddGolfPro from "./AddGolfPro";
+import AddLocation from "./AddLocation";
 import Register from './Register';
 import EditAppointment from './EditAppointment';
 import Appointment from './Appointment';
@@ -58,6 +60,14 @@ const App = () => {
     setAppointments(updatedAppointments)
   }
 
+  function onHandleLocationSubmit(newLocation) {
+    setLocations([...locations, newLocation])
+  }
+
+  function onHandleGolfProSubmit(newGolfPro) {
+    setGolfPros([...golfPros, newGolfPro])
+  } 
+
   return (
     <div className="homepage">
       <h1>Welcome to the Golf School</h1>
@@ -69,6 +79,16 @@ const App = () => {
         <Route
           path="/locations"
           element={<Location locations={locations} />}
+        />
+        <Route
+          exact
+          path="/addgolfpro"
+          element={<AddGolfPro locations={locations} onHandleGolfProSubmit={onHandleGolfProSubmit}/>}
+        />
+        <Route
+          exact
+          path="/addlocation" 
+          element={<AddLocation onHandleLocationSubmit={onHandleLocationSubmit}/>}
         />
         <Route
           exact
