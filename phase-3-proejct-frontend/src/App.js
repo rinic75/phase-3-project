@@ -5,6 +5,7 @@ import Header from "./Header";
 import Location from "./Location";
 import AddGolfPro from "./AddGolfPro";
 import AddLocation from "./AddLocation";
+import EditGolfPro from "./EditGolfPro";
 import Register from './Register';
 import EditAppointment from './EditAppointment';
 import Appointment from './Appointment';
@@ -65,8 +66,34 @@ const App = () => {
   }
 
   function onHandleGolfProSubmit(newGolfPro) {
-    setGolfPros([...golfPros, newGolfPro])
+    
+    const newLocations = locations.map(location  => {
+      if (location.id === newGolfPro.location_id) {
+        location.golfpros.push(newGolfPro)
+      }
+      return location
+    }
+   )
+   setLocations(newLocations)
   } 
+
+  function onHandleGolfProEdit(editedGolfPro) {
+    const updatedGolfPros = locations.map(location => {
+      if (location.id === editedGolfPro.location_id) {
+        const updatedGolfPros = location.golfpros.map(golfPro => {
+          if (golfPro.id === editedGolfPro.id) {
+            return editedGolfPro
+          } else {
+            return golfPro
+          }
+        })
+        location.golfpros = updatedGolfPros
+      }
+      return location
+    })
+    setLocations(updatedGolfPros)
+  }
+
 
   return (
     <div className="homepage">
@@ -84,6 +111,11 @@ const App = () => {
           exact
           path="/addgolfpro"
           element={<AddGolfPro locations={locations} onHandleGolfProSubmit={onHandleGolfProSubmit}/>}
+        />
+        <Route
+          exact
+          path="/editgolfpro/:id"
+          element={<EditGolfPro locations={locations} onHandleGolfProEdit={onHandleGolfProEdit}/>}
         />
         <Route
           exact
